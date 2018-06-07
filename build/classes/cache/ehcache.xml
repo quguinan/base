@@ -1,0 +1,22 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false">
+	<diskStore path="java.io.tmpdir" />
+
+
+	<defaultCache maxElementsInMemory="10000" eternal="false" diskExpiryThreadIntervalSeconds="120" 
+		timeToIdleSeconds="3600"  overflowToDisk="true" />
+	<!-- 用户登录的设备id和登录时间缓存，存储到磁盘，并且在内存中永久保存 -->	
+    <cache name="userid_sbid" diskPersistent="true" eternal="true" maxElementsInMemory="10000" maxElementsOnDisk="10000000" overflowToDisk="true" ></cache>
+	<!-- 3000分钟 -->
+<!-- 	<cache name="session" diskPersistent="true" eternal="true" maxElementsInMemory="10000" maxElementsOnDisk="10000000" overflowToDisk="true" ></cache> -->
+<!-- 	<cache name="userid_imservername" diskPersistent="true" eternal="true" maxElementsInMemory="10000" maxElementsOnDisk="10000000" overflowToDisk="true" ></cache> -->
+<!-- 	<cache name="userid_token" diskPersistent="true" eternal="true" maxElementsInMemory="10000" maxElementsOnDisk="10000000" overflowToDisk="true" ></cache> -->
+	
+	<cache name="session" diskPersistent="true" eternal="true" maxElementsInMemory="10000" maxElementsOnDisk="10000000" overflowToDisk="true" ></cache>
+	<cache name="userid_imservername" diskPersistent="true" eternal="true" maxElementsInMemory="10000" maxElementsOnDisk="10000000" overflowToDisk="true"  ></cache>
+	<cache name="userid_token" diskPersistent="true" eternal="true" maxElementsInMemory="10000" maxElementsOnDisk="10000000" overflowToDisk="true"  ></cache>
+<!-- 	<cache name="group" diskPersistent="true" eternal="true" maxElementsInMemory="10000" maxElementsOnDisk="10000000" overflowToDisk="true" ></cache> -->
+	<!-- 微信会话状态，保持10分钟 -->
+	<cache name="state" maxElementsInMemory="10000" eternal="false" diskExpiryThreadIntervalSeconds="120" 
+		  overflowToDisk="true"  timeToLiveSeconds="600"></cache>
+</ehcache>

@@ -1,0 +1,52 @@
+/**
+** create by code gen .
+**/
+package com.yy.model;
+
+import java.util.Date;
+import java.math.BigDecimal;
+
+import my.dao.annotation.Column;
+import my.dao.annotation.DateFormat;
+import my.dao.annotation.Id;
+import my.dao.annotation.Name;
+import my.dao.annotation.PK;
+import my.dao.annotation.Table;
+import my.dao.annotation.View;
+import my.dao.mapping.ColumnType;
+import my.dao.mapping.MappingInfo;
+import my.dao.mapping.MappingInfoHolder;
+import my.base.BasePO;
+
+
+
+@Table("$tableName")
+@View("$viewName")
+@PK({ $pk })
+public class $classname extends BasePO{
+
+/**
+* 
+*/
+private static final long serialVersionUID = 1L;
+
+	public static final $classname INSTANCE = new $classname();
+	
+#foreach( $col in $cols )
+$col.ann
+	private $col.ctype $col.name ;
+	
+#end
+
+#foreach( $col in $cols )
+
+	public $col.ctype $col.MethodName (){
+		return $col.name;
+	}
+		 
+	public void $col.setMethodName ($col.ctype $col.name){
+		this.$col.name=$col.name;
+	}
+#end
+
+}

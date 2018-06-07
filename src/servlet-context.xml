@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+	<context:component-scan base-package="com.cms">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+
+
+
+	<default-servlet-handler />
+
+	<!-- <view-controller path="/" view-name="login" /> -->
+	<view-controller path="/500" view-name="error/500" />
+	<view-controller path="/404" view-name="error/404" />
+
+	<resources location="/img/" mapping="/img/**" />
+	<resources location="/images/" mapping="/images/**" />
+	<resources location="/js/" mapping="/js/**" />
+	<resources location="/static/" mapping="/static/**" />
+	<resources location="/assets/" mapping="/static/**" />
+	<resources location="/css/" mapping="/css/**" />
+	<resources location="/font/" mapping="/font/**" />
+	<resources location="/lib/" mapping="/lib/**" />
+	<resources location="/i/" mapping="/i/**" />
+	<resources location="/themes/" mapping="/themes/**" />
+	<resources location="/chart/" mapping="/chart/**" />
+	<resources location="/attached/" mapping="/attached/**" />
+
+	<beans:bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<beans:property name="order" value="1" />
+		<beans:property name="defaultContentType" value="text/html" />
+		<beans:property name="favorPathExtension" value="true" /><!-- 
+			默认true，根据扩展名确定MIME类型 -->
+		<beans:property name="favorParameter" value="false" /><!-- 
+			默认false，通过请求参数确定MIME类型，默认参数是formate，可通过parameterName属性改变 -->
+		<beans:property name="ignoreAcceptHeader" value="true" /><!-- 
+			默认false，若以上步骤没确定MIME类型则根据请求报文头确定 -->
+		<beans:property name="mediaTypes">
+			<beans:map>
+				<beans:entry key="json" value="application/json" />
+				<beans:entry key="xml" value="application/xml" />
+				<beans:entry key="atom" value="application/atom+xml" />
+			</beans:map>
+		</beans:property>
+		<beans:property name="defaultViews">
+			<beans:list>
+				<beans:bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+					<beans:property name="objectMapper">
+						<beans:bean class="org.codehaus.jackson.map.ObjectMapper">
+							<beans:property name="dateFormat">
+								<beans:bean class="java.text.SimpleDateFormat">
+									<beans:constructor-arg value="yyyy-M-d H:m" />
+								</beans:bean>
+							</beans:property>
+							<!-- <beans:property name="serializationInclusion"> -->
+							<!-- <beans:value -->
+							<!-- type="org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion">NON_NULL</beans:value> -->
+							<!-- </beans:property> -->
+						</beans:bean>
+					</beans:property>
+				</beans:bean>
+				<beans:bean
+					class="org.springframework.web.servlet.view.xml.MarshallingView">
+					<beans:property name="marshaller">
+						<beans:bean class="my.util.MyXStreamMarshaller">
+						</beans:bean>
+					</beans:property>
+				</beans:bean>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="order" value="10" />
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="209715200">
+		</beans:property>
+	</beans:bean>
+
+	<!-- Saves a locale change using a cookie -->
+	<beans:bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+
+
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/**" />
+			<exclude-mapping path="/css/**" />
+			<exclude-mapping path="/js/**" />
+			<exclude-mapping path="/static/**" />
+			<exclude-mapping path="/assets/**" />
+			<exclude-mapping path="/img/**" />
+			<exclude-mapping path="/image/**" />
+			<exclude-mapping path="/lib/**" />
+			<exclude-mapping path="/themes/**" />
+			<exclude-mapping path="/chart/**" />
+			<exclude-mapping path="/i/**" />
+			<exclude-mapping path="/images/**" />
+			<exclude-mapping path="/attached/**" />
+			<beans:bean id="contextInterceptor" class="com.cms.interceptor.ContextInterceptor">
+			</beans:bean>
+		</interceptor>
+	</interceptors>
+
+	<!-- Configures the @Controller programming model -->
+	<annotation-driven>
+		<message-converters register-defaults="true">
+			<beans:bean class="my.util.MessageConvert">
+				<beans:property name="supportedMediaTypes">
+					<beans:value>*/*</beans:value>
+				</beans:property>
+				<beans:property name="objectMapper">
+					<beans:bean class="my.util.MyObjectMapper">
+						<!-- <beans:property name="dateFormat"> -->
+						<!-- <beans:bean class="java.text.SimpleDateFormat"> -->
+						<!-- <beans:constructor-arg value="yyyy-M-d H:m" /> -->
+						<!-- </beans:bean> -->
+						<!-- </beans:property> -->
+						<!-- <beans:property name="serializationInclusion"> -->
+						<!-- <beans:value -->
+						<!-- type="org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion">NON_NULL</beans:value> -->
+						<!-- </beans:property> -->
+					</beans:bean>
+				</beans:property>
+			</beans:bean>
+		</message-converters>
+	</annotation-driven>
+</beans:beans> 

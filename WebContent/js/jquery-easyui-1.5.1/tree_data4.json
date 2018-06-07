@@ -1,0 +1,15 @@
+[
+    {
+        'id':'01',
+        'text':'系统设置',
+        'iconCls':'icon_cog',
+        'children':[
+            {
+                'checked':false,
+                'id':'01001',
+                'text':'系统菜单',
+                'iconCls':'icon_text_align_justify'
+            }
+        ]
+    }
+]
