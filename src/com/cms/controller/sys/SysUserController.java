@@ -51,8 +51,9 @@ public class SysUserController extends BaseController{
 			filter.append(" and roleid = ? ");
 			params.add(roleid);
 		}
-		return PageFactory.newPage(SysUser.class, filter.toString()," order by userid ",
+		GridDataModel<SysUser> gridDataModel=PageFactory.newPage(SysUser.class, filter.toString()," order by userid ",
 				params.toArray());
+		return gridDataModel;
 	}
 	
 	@ResponseBody
