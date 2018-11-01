@@ -31,6 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		#table-psw {font-size: 10px;}
 		
 		table tr td {border:0px red solid;}
+		
+		
+		}
     </style>
 	<jsp:include page="../inc/injs.jsp"/>
 	
@@ -55,14 +58,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            title : n.text,  
 	                            iconCls : n.iconcls,  
 	                            selected : true, 
-	                            content : '<div style="padding:0px"><ul name="'+n.text+'"></ul></div>',  
+	                            content : '<div style="padding:5px"><ul name="'+n.text+'"></ul></div>',  
 	                        });  
 	                    } else {  
 	                        $('#west_accordion').accordion('add', {  
 	                            title : n.text,  
 	                            iconCls : n.iconcls,  
 	                            selected : false, 
-	                            content : '<div style="padding:0px"><ul name="'+n.text+'"></ul></div>',  
+	                            content : '<div style="padding:5px"><ul name="'+n.text+'"></ul></div>',  
 	                        });  
 	                    }   
 	                });  
@@ -70,6 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        });  
 			/*  异步加载子节点，即二级菜单  */
 	        $('#west_accordion').accordion({  
+	        	
 	            onSelect : function(title, index) {  
 	                $("ul[name='" + title + "']").tree({  
 	                    url : '${pageContext.request.contextPath}/cms/home/level2',  
@@ -84,6 +88,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    onClick: function(node){// 在用户点击一个子节点即二级菜单时触发addTab()方法,用于添加tabs  
 	                            addTab(node.text,node.url,node.iconCls);  
 	                    }  
+	                    /* 改变字体大小 */
+	                    /* ,
+	                    	 formatter:function(node){
+	                    	var s ='<font size="3" face="NSimSun">'+node.text+'</font>';
+	                    	if (node.children){
+	                    		s += '&nbsp;<span style=\'color:blue\'>(' + node.children.length + ')</span>';
+	                    	} 
+	                    	return s;
+	                    }     */
 	                });  
 	            }  
 	        });  
@@ -332,7 +345,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- ***页尾*** -->
 		<div id="south" data-options="region:'south',border:false" style="height:18px;background:#00BBEE;padding:0px;text-align: right;color:#FFF">
 			版本v1.0
-		</div> 
+		</div>  
 		
 		
 		<div id="changePsw">

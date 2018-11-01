@@ -24,7 +24,7 @@ var LANG="${pageContext.request.locale}";
  <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-easyui-1.5.1/jquery.easyui-1.5.1.min.js"></script>  
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-easyui-1.5.1/easyui-lang-zh_CN.js"></script>  
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-easyui-1.5.1/datagrid-filter.js"></script> 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/jquery-easyui-1.5.1/themes/material/easyui.css"> 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/jquery-easyui-1.5.1/themes/gray/easyui.css"> 
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/jquery-easyui-1.5.1/themes/default/easyui.css">  --%> 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/jquery-easyui-1.5.1/themes/icon.css"> 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/jquery-easyui-1.5.1/themes/color.css">  

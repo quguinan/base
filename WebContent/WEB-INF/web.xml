@@ -52,14 +52,14 @@
     <filter-name>DruidWebStatFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  <filter>
+  <!-- <filter>
     <filter-name>license</filter-name>
     <filter-class>com.cms.filter.LicenseFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>license</filter-name>
     <url-pattern>/cms/home</url-pattern>
-  </filter-mapping> 
+  </filter-mapping>  -->
   <filter>
     <filter-name>login</filter-name>
     <filter-class>com.cms.filter.LoginFilter</filter-class>
